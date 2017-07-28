@@ -38,6 +38,8 @@ public class ContactListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mContactList = new ArrayList<>();
 
+        mChipsInput.setHint("Prdel v pici");
+
         // get contact list
         new RxPermissions(this)
                 .request(Manifest.permission.READ_CONTACTS)

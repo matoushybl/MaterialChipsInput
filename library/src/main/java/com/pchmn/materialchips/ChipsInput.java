@@ -42,7 +42,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
     private ChipsAdapter mChipsAdapter;
     // attributes
     private static final int NONE = -1;
-    private String mHint;
+//    private String mHint;
     private ColorStateList mHintColor;
     private ColorStateList mTextColor;
     private int mMaxRows = 2;
@@ -99,7 +99,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
 
             try {
                 // hint
-                mHint = a.getString(R.styleable.ChipsInput_hint);
+//                mHint = a.getString(R.styleable.ChipsInput_hint);
                 mHintColor = a.getColorStateList(R.styleable.ChipsInput_hintColor);
                 mTextColor = a.getColorStateList(R.styleable.ChipsInput_textColor);
                 mMaxRows = a.getInteger(R.styleable.ChipsInput_maxRows, 2);
@@ -211,7 +211,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
         return chipView;
     }
 
-    public ChipsInputEditText getEditText() {
+    public ChipsInputEditText createEditText() {
         ChipsInputEditText editText = new ChipsInputEditText(mContext);
         if(mHintColor != null)
             editText.setHintTextColor(mHintColor);
@@ -219,6 +219,10 @@ public class ChipsInput extends ScrollViewMaxHeight {
             editText.setTextColor(mTextColor);
 
         return editText;
+    }
+
+    public EditText getEditText() {
+        return mChipsAdapter.getEditText();
     }
 
     public DetailedChipView getDetailedChipView(ChipInterface chip) {
@@ -267,11 +271,11 @@ public class ChipsInput extends ScrollViewMaxHeight {
     }
 
     public String getHint() {
-        return mHint;
+        return mChipsAdapter.getHint();
     }
 
     public void setHint(String mHint) {
-        this.mHint = mHint;
+        mChipsAdapter.setHint(mHint);
     }
 
     public void setHintColor(ColorStateList mHintColor) {

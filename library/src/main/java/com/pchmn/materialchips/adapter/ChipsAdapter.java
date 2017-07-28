@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.pchmn.materialchips.ChipsInput;
 import com.pchmn.materialchips.model.ChipInterface;
 import com.pchmn.materialchips.views.ChipsInputEditText;
 import com.pchmn.materialchips.views.DetailedChipView;
-import com.pchmn.materialchips.model.Chip;
 import com.pchmn.materialchips.util.ViewUtil;
 import com.pchmn.materialchips.views.FilterableListView;
 
@@ -38,6 +36,11 @@ public class ChipsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private ChipsInput mChipsInput;
     private List<ChipInterface> mChipList = new ArrayList<>();
     private String mHintLabel;
+
+    public ChipsInputEditText getEditText() {
+        return mEditText;
+    }
+
     private ChipsInputEditText mEditText;
     private RecyclerView mRecycler;
 
@@ -45,8 +48,8 @@ public class ChipsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         mContext = context;
         mChipsInput = chipsInput;
         mRecycler = recycler;
-        mHintLabel = mChipsInput.getHint();
-        mEditText = mChipsInput.getEditText();
+        mHintLabel = "";
+        mEditText = mChipsInput.createEditText();
         initEditText();
     }
 
@@ -387,5 +390,18 @@ public class ChipsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
 
         return false;
+    }
+
+    public String getHint() {
+        return mEditText.getHint().toString();
+    }
+
+    public void setHint(String hint) {
+        this.mHintLabel = hint;
+        mEditText.setHint(hint);
+    }
+
+    public void setHintColor(int color) {
+        mEditText.setHintTextColor(color);
     }
 }
